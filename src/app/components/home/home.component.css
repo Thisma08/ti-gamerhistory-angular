@@ -1,0 +1,29 @@
+nav {
+  display: flex;
+  justify-content: space-around;
+  font-family: Arial, sans-serif;
+  font-size: xx-large;
+  background-color: #183919;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+nav a {
+  color: #4CAF50;
+  text-decoration: none;
+}
+
+nav a:visited {
+  color: #4CAF50;
+}
+
+nav a:hover {
+  color: #a3faa6;
+}
+
+nav a.active {
+  color: #a3faa6;
+}

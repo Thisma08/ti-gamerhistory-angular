@@ -1,0 +1,19 @@
+h1 {
+  color: red;
+  font-size: 150px;
+  text-align: center;
+  font-family: Arial, sans-serif;
+  text-shadow: 0 0 50px red;
+}
+
+h2 {
+  color: red;
+  text-align: center;
+  font-family: Arial, sans-serif;
+}
+
+p {
+  color: white;
+  text-align: center;
+  font-family: Arial, sans-serif;
+}

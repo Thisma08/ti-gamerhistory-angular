@@ -1,0 +1,63 @@
+<form [formGroup]="createUserForm" (ngSubmit)="onSubmit(); resetForm()">
+
+  <h2>Create an User</h2>
+
+  <label for="pseudo">Username: </label>
+  <input type="text" id="pseudo" formControlName="pseudo"/>
+  @if(createUserForm.get('pseudo')?.invalid && createUserForm.get('pseudo')?.touched) {
+    <div class="error-message">
+      Username is required and must be at most 100 characters.
+    </div>
+  }
+
+  <br>
+
+  <label for="email">Email: </label>
+  <input type="text" id="email" formControlName="email"/>
+  @if(createUserForm.get('email')?.invalid && createUserForm.get('email')?.touched) {
+    <div class="error-message">
+      Email is required and must be at most 150 characters.
+    </div>
+  }
+
+  <br>
+
+  <label for="password">Password: </label>
+  <input type="text" id="password" formControlName="password"/>
+  @if(createUserForm.get('password')?.invalid && createUserForm.get('password')?.touched) {
+    <div class="error-message">
+      Password is required and must be at most 150 characters.
+    </div>
+  }
+
+  <br>
+
+  <label for="role">Role: </label>
+  <select id="role" formControlName="role">
+    <option value="admin">Admin</option>
+    <option value="user">User</option>
+  </select>
+  @if(createUserForm.get('role')?.invalid && createUserForm.get('role')?.touched) {
+    <div class="error-message">
+      Role is required.
+    </div>
+  }
+
+  <br>
+
+  <button type="submit" [disabled]="createUserForm.invalid">Create User</button>
+</form>
+
+@if(successMessage) {
+  <div class="success-message">
+    {{ successMessage }}
+  </div>
+}
+
+@if(errorMessage) {
+  <div class="error-message">
+    {{ errorMessage }}
+  </div>
+}
+
+

@@ -1,0 +1,25 @@
+<div>
+  <h2>List of users</h2>
+  <table>
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Username</th>
+      <th>Email</th>
+      <th>Role</th>
+    </tr>
+    </thead>
+    <tbody>
+    @for(user of users; track $index; let e = $even; let o = $odd) {
+      <tr [ngClass]="{'even': e, 'odd': o}">
+        <td>{{user.id}}</td>
+        <td>{{user.pseudo}}</td>
+        <td>{{user.email}}</td>
+        <td>{{user.role}}</td>
+      </tr>
+    }
+    </tbody>
+  </table>
+</div>
+
+<app-user-create (createdUser)="onCreatedUser($event)"></app-user-create>

@@ -38,14 +38,16 @@ export class AuthService {
     return null;
   }
 
-/*  private decodeToken(token: string): any {
-    const parts = token.split('.');
-    if (parts.length === 3) {
-      const payload = atob(parts[1]);
-      return JSON.parse(payload);
+  getUsername(): string | null {
+    const token = this.getToken();
+    console.log('Retrieved token in getUsername:', token);
+    if (token) {
+      const payload = this.decodeToken(token);
+      console.log('Decoded token payload:', payload);
+      return payload ? payload.name : null;
     }
     return null;
-  }*/
+  }
 
   private decodeToken(token: string): any {
     const parts = token.split('.');
@@ -60,5 +62,11 @@ export class AuthService {
       return decodedPayload;
     }
     return null;
+  }
+
+  logout(): Observable<any> {
+    return this.http.delete<any>(this.apiUrl, {
+      withCredentials: true,
+    });
   }
 }
