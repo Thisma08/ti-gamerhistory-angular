@@ -16,6 +16,8 @@ import {Router} from '@angular/router';
 export class LoginComponent {
   loginForm: FormGroup;
   role: string | null = null;
+  loading = false;
+  errorMessage: string = '';
 
   constructor(private authService: AuthService, private fb: FormBuilder, private router: Router) {
     this.loginForm = this.fb.group({
@@ -25,7 +27,10 @@ export class LoginComponent {
   }
 
   onSubmit(): void {
+    this.loading = true
+
     if (this.loginForm.invalid) {
+      this.loading = false;
       return;
     }
 
@@ -40,10 +45,16 @@ export class LoginComponent {
           console.log('Retrieved token:', this.authService.getToken());
           this.role = this.authService.getRole();
         }
-        this.router.navigate(['/home'])
+        this.loading = false;
+        this.router.navigate(['/history'])
       },
       (error) => {
+        this.loading = false;
+        this.errorMessage = 'Invalid username or password.';
         console.error('Login failed:', error);
+        setTimeout(() => {
+          this.errorMessage = '';
+        }, 5000);
       }
     );
   }

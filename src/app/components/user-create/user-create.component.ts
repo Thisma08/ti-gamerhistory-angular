@@ -32,10 +32,10 @@ export class UserCreateComponent {
     private fb: FormBuilder
   ) {
     this.createUserForm= this.fb.group({
-      pseudo: [this.user.pseudo, [Validators.required]],
-      email: [this.user.email, [Validators.required]],
-      password: [this.user.password, [Validators.required]],
-      role: [this.user.role, [Validators.required]]
+      pseudo: [this.user.pseudo, [Validators.required, Validators.maxLength(100)]],
+      email: [this.user.email, [Validators.required, Validators.maxLength(150)]],
+      password: [this.user.password, [Validators.required, Validators.maxLength(150)]],
+      role: [this.user.role, [Validators.required, Validators.maxLength(5)]]
     })
   }
 

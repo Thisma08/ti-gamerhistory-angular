@@ -16,6 +16,7 @@ import {UserCreateComponent} from '../user-create/user-create.component';
 })
 export class UserListComponent implements OnInit {
   users: User[] = [];
+  loading = true;
 
   constructor(
     private userService: UserService,
@@ -26,9 +27,16 @@ export class UserListComponent implements OnInit {
   }
 
   loadUsers(): void {
-    this.userService.getAllUsers().subscribe((data: User[]) => {
-      this.users = data;
-    });
+    this.userService.getAllUsers().subscribe(
+      (data: User[]) => {
+        this.users = data;
+        this.loading = false;
+      },
+      (error) => {
+        console.error('Error fetching users:', error);
+        this.loading = false;
+      }
+    );
   }
 
   onCreatedUser(newUser: User): void {

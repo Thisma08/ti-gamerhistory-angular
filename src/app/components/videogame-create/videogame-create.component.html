@@ -1,1 +1,56 @@
-<p>videogame-create works!</p>
+<form [formGroup]="createGameForm" (ngSubmit)="onSubmit(); resetForm()">
+
+  <h2>Create a Game</h2>
+
+  <label for="name">Name: </label>
+  <input type="text" id="name" formControlName="name"/>
+  @if(createGameForm.get('name')?.invalid && createGameForm.get('name')?.touched) {
+    <div class="error-message">
+      Name is required and must be at most 100 characters.
+    </div>
+  }
+
+  <br>
+
+  <label for="minutesForCompletion">Time to complete (minutes): </label>
+  <input type="text" id="minutesForCompletion" formControlName="minutesForCompletion"/>
+  @if(createGameForm.get('minutesForCompletion')?.invalid && createGameForm.get('minutesForCompletion')?.touched) {
+    <div class="error-message">
+      Time to complete is required and must be at least of 1 minute.
+    </div>
+  }
+
+  <br>
+
+  <label for="supportId">Support: </label>
+  <select type="text" id="supportId" formControlName="supportId">
+    @for (support of supports; track $index) {
+      <option value="{{support.id}}">
+        {{support.name}}
+      </option>
+    }
+  </select>
+  @if(createGameForm.get('support')?.invalid && createGameForm.get('support')?.touched) {
+    <div class="error-message">
+      Support is required.
+    </div>
+  }
+
+  <br>
+
+  <button type="submit" [disabled]="createGameForm.invalid">Create Game</button>
+</form>
+
+@if(successMessage) {
+  <div class="success-message">
+    {{ successMessage }}
+  </div>
+}
+
+@if(errorMessage) {
+  <div class="error-message">
+    {{ errorMessage }}
+  </div>
+}
+
+

@@ -2,19 +2,21 @@
   <nav class="sidebar">
     @if(userRole == 'admin') {
       <h2>Welcome, {{this.username}}!</h2>
-      <h3>You are logged in as Admin.</h3>
+      <h3>You are logged in as <b class="role-name">Admin</b>.</h3>
     }
     @if(userRole == 'user') {
       <h2>Welcome, {{this.username}}!</h2>
-      <h3>You are logged in as User.</h3>
+      <h3>You are logged in as <b class="role-name">Admin</b>.</h3>
     }
     <ul>
-      @if(userRole == 'admin' || userRole == 'user') {
-        <li><a routerLinkActive="active" routerLink="/home">Home</a></li>
+      @if(userRole == 'user') {
+        <li><a routerLinkActive="active" routerLink="/history">History</a></li>
+        <li><a routerLinkActive="active" routerLink="/user/videogames">Manage Games</a></li>
       }
 
       @if(userRole == 'admin') {
-        <li><a routerLinkActive="active" routerLink="/admin/videogames">Manage Videogames</a></li>
+        <li><a routerLinkActive="active" routerLink="/history">History</a></li>
+        <li><a routerLinkActive="active" routerLink="/admin/videogames">Manage Games</a></li>
         <li><a routerLinkActive="active" routerLink="/admin/users">Manage Users</a></li>
       }
 

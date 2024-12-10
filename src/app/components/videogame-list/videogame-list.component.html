@@ -1,1 +1,44 @@
-<p>videogame-list works!</p>
+<div>
+  <h2>List of Games</h2>
+  <div class="support-filter">
+    <label for="support">Support: </label>
+    <select [(ngModel)]="selectedSupport" id="support">
+      <option value="">All</option>
+      @for (support of supports; track $index) {
+        <option value="{{support.id}}">
+          {{support.name}}
+        </option>
+      }
+    </select>
+  </div>
+  @if(loading) {
+    <div class="spinner-container">
+      <div class="spinner"></div>
+      <p>Loading...</p>
+    </div>
+  }
+  @if(!loading) {
+    <table>
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Time to complete</th>
+        <th>Support</th>
+      </tr>
+      </thead>
+      <tbody>
+        @for(game of filteredGames; track $index; let e = $even; let o = $odd) {
+          <tr [ngClass]="{'even': e, 'odd': o}">
+            <td>{{game.id}}</td>
+            <td>{{game.name}}</td>
+            <td>{{game.minutesForCompletion}}</td>
+            <td>{{ getSupportNameById(game.supportId) }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
+</div>
+
+<app-videogame-create (createdGame)="onCreatedGame($event)"></app-videogame-create>

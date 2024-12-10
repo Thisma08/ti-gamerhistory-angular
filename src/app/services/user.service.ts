@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import {delay, Observable, of} from 'rxjs';
 import {User} from '../classes/user';
 
 @Injectable({
@@ -13,6 +13,14 @@ export class UserService {
 
   getAllUsers(): Observable<User[]> {
     return this.http.get<User[]>(this.apiUrl);
+/*
+    const mockUsers: User[] = [
+      { id: 1, pseudo: 'JohnDoe', email: 'john@example.com', password: 'password', role: 'Admin' },
+      { id: 2, pseudo: 'JaneDoe', email: 'jane@example.com', password: 'password', role: 'User' },
+    ];
+
+    return of(mockUsers).pipe(delay(3000));
+*/
   }
 
   createUser(user: User): Observable<User> {

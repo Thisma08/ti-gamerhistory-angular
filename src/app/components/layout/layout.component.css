@@ -70,3 +70,7 @@
   padding-left: 10px;
   overflow-y: auto;
 }
+
+.role-name {
+  color: #00ffff;
+}

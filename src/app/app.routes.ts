@@ -9,6 +9,7 @@ import {UserListComponent} from './components/user-list/user-list.component';
 import {UserCreateComponent} from './components/user-create/user-create.component';
 import {VideogameCreateComponent} from './components/videogame-create/videogame-create.component';
 import {NotFoundComponent} from './components/not-found/not-found.component';
+import {HistoryComponent} from './components/history/history.component';
 
 export const routes: Routes = [
   {
@@ -20,8 +21,8 @@ export const routes: Routes = [
     component: LayoutComponent,
     children: [
       {
-        path: 'home',
-        component: HomeComponent,
+        path: 'history',
+        component: HistoryComponent,
       },
       {
         path: 'user',
