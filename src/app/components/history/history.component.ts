@@ -102,4 +102,18 @@ export class HistoryComponent implements OnInit {
     const user = this.users.find(u => u.id === userId);
     return user ? user.pseudo : 'Unknown';
   }
+
+  getGameProgressPercentage(gameId: number | undefined): number {
+    const totalMinutesPlayed = this.gameSessions
+      .filter(session => session.gameId === gameId)
+      .reduce((acc, session) => acc + session.gameTimeMin, 0);
+
+    const game = this.games.find(g => g.id === gameId);
+    if (!game || game.minutesForCompletion === 0) {
+      return 0;
+    }
+
+    const percentage = (totalMinutesPlayed / game.minutesForCompletion) * 100;
+    return Math.min(percentage, 100);
+  }
 }

@@ -19,3 +19,22 @@
     }
   }
 </div>
+@if(!loading) {
+  <div class="dashboard">
+    <h3>Game Progress Dashboard</h3>
+    <ul>
+      @for (game of games; track $index) {
+        <li>
+          <p>{{ game.name }}</p>
+          <div class="progress-bar-container">
+            <div
+              class="progress-bar"
+              [style.width.%]="getGameProgressPercentage(game.id)"
+            ></div>
+          </div>
+          <span>Game completed at {{ getGameProgressPercentage(game.id) }}%.</span>
+        </li>
+      }
+    </ul>
+  </div>
+}
