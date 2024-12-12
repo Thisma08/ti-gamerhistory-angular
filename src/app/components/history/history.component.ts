@@ -7,6 +7,7 @@ import {Game} from '../../classes/game';
 import {VideogameService} from '../../services/videogame.service';
 import {User} from '../../classes/user';
 import {UserService} from '../../services/user.service';
+import {AuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'app-history',
@@ -29,7 +30,8 @@ export class HistoryComponent implements OnInit {
   constructor(
     private gameSessionService: GameSessionService,
     private videogameService: VideogameService,
-    private userService: UserService
+    private userService: UserService,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -42,6 +44,7 @@ export class HistoryComponent implements OnInit {
     this.gameSessionService.getAllGameSessions().subscribe(
       (data: GameSession[]) => {
         this.gameSessions = data;
+        this.filterSessionsByUser();
         this.groupAndSortSessions();
         this.loading = false;
       },
@@ -50,6 +53,13 @@ export class HistoryComponent implements OnInit {
         this.loading = false;
       }
     );
+  }
+
+  filterSessionsByUser(): void {
+    const userId = this.authService.getUserId();
+    if (userId) {
+      this.gameSessions = this.gameSessions.filter(session => session.userId.toString() === userId);
+    }
   }
 
   loadGames(): void {

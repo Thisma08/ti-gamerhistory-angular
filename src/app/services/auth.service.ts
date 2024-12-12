@@ -49,6 +49,15 @@ export class AuthService {
     return null;
   }
 
+  getUserId(): string | null {
+    const token = this.getToken();
+    if (token) {
+      const payload = this.decodeToken(token);
+      return payload ? payload.sub : null;
+    }
+    return null;
+  }
+
   private decodeToken(token: string): any {
     const parts = token.split('.');
     if (parts.length === 3) {

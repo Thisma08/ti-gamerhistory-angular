@@ -12,7 +12,7 @@
       <ul>
         @for(gameSession of group.sessions; track $index) {
           <li>
-            User: {{getUserNameById(gameSession.userId)}} | Game: {{getGameNameById(gameSession.gameId)}} | Game time: {{gameSession.gameTimeMin}} minutes.
+            You played <a class="text-highlight">{{getGameNameById(gameSession.gameId)}}</a> for <a class="text-highlight">{{gameSession.gameTimeMin}}</a> minutes.
           </li>
         }
       </ul>

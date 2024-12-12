@@ -81,3 +81,8 @@ ul {
     transform: rotate(360deg);
   }
 }
+
+.text-highlight {
+  color: #00ffff;
+  font-weight: bold;
+}
