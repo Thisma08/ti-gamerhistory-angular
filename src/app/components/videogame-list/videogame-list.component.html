@@ -1,5 +1,8 @@
 <div>
   <h2>List of Games</h2>
+
+  <button (click)="toggleCreateForm()">Add Game</button>
+
   <div class="support-filter">
     <label for="support">Support: </label>
     <select [(ngModel)]="selectedSupport" id="support">
@@ -11,13 +14,15 @@
       }
     </select>
   </div>
-  @if(loading) {
+
+  @if (loading) {
     <div class="spinner-container">
       <div class="spinner"></div>
       <p>Loading...</p>
     </div>
   }
-  @if(!loading) {
+
+  @if (!loading) {
     <table>
       <thead>
       <tr>
@@ -28,12 +33,12 @@
       </tr>
       </thead>
       <tbody>
-        @for(game of filteredGames; track $index; let e = $even; let o = $odd) {
+        @for (game of filteredGames; track $index; let e = $even; let o = $odd) {
           <tr [ngClass]="{'even': e, 'odd': o}">
             <td>{{game.id}}</td>
             <td>{{game.name}}</td>
             <td>{{game.minutesForCompletion}}</td>
-            <td>{{ getSupportNameById(game.supportId) }}</td>
+            <td>{{getSupportNameById(game.supportId)}}</td>
           </tr>
         }
       </tbody>
@@ -41,4 +46,11 @@
   }
 </div>
 
-<app-videogame-create (createdGame)="onCreatedGame($event)"></app-videogame-create>
+@if(showCreateForm) {
+  <div class="modal">
+    <div class="modal-content">
+      <span class="close-button" (click)="toggleCreateForm()">&times;</span>
+      <app-videogame-create (createdGame)="onCreatedGame($event)"></app-videogame-create>
+    </div>
+  </div>
+}
